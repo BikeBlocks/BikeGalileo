@@ -24,11 +24,14 @@ io.on('connection', function (socket) {
 var button = new m.Gpio(7);
 button.dir(m.DIR_IN);
 var previousread;
+var ltime;
 setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
-		io.emit('buttonpress');
+    var duration = ltime.substract(moment());
+		io.emit('buttonpress',{time:duration.millisecond()});
     console.log("btnemit");
+    ltime = moment();
 	}
     previousread = button.read();  
 }, 100);
