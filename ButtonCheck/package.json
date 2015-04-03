@@ -1,0 +1,22 @@
+{
+  "name": "LedBlink",
+  "version": "1.0.0",
+  "description": "Led blinker for Galileo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+	"mraa"      : "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BikeBlocks/BikeGalileo"
+  },
+  "author": "Charlène Chabert, Alain Lim, Rémi Nicole and Maxence Aïci",
+  "license": "MIT (2015)",
+  "bugs": {
+    "url": "https://github.com/BikeBlocks/BikeGalileo/issues"
+  },
+  "homepage": "https://github.com/BikeBlocks/BikeGalileo"
+}
