@@ -1,6 +1,6 @@
 var m = require("mraa");
 
-var button = m.Gpio(7);
+var button = new m.Gpio(7);
 button.dir(m.DIR_IN);
 
 setInterval(function() {
