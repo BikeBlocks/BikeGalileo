@@ -29,6 +29,6 @@ setInterval(function() {
 	if(button.read() == 0 && previousread != 0) {
 		io.emit('buttonpress');
     console.log("btnemit");
-    previousread = button.read();
 	}
-}, 50);
+    previousread = button.read();  
+}, 100);
