@@ -24,7 +24,7 @@ io.on('connection', function (socket) {
 var button = new m.Gpio(7);
 button.dir(m.DIR_IN);
 var previousread;
-var ltime;
+var ltime = moment();
 setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
