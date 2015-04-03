@@ -10,7 +10,7 @@
   <h1>Test socket.io</h1>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect('http://' + document.location.href);
     socket.on('news', function (data) {
       console.log(data);
       socket.emit('my other event', {
@@ -20,4 +20,4 @@
   </script>
 </body>
 
-</html>
+</html>  
