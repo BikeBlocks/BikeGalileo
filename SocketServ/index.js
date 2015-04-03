@@ -29,7 +29,7 @@ setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
     var duration = ltime.subtract(moment());
-		io.emit('buttonpress',{time:duration.millisecond()});
+		io.emit('buttonpress',{time:duration.millisecond(),speed:(3.1415*50*36)/duration.millisecond()});
     console.log("btnemit");
     ltime = moment();
 	}
