@@ -34,4 +34,4 @@ setInterval(function() {
     ltime = moment();
 	}
     previousread = button.read();  
-}, 100);
+}, 10);
