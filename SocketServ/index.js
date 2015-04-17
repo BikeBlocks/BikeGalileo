@@ -22,12 +22,15 @@ var button = new m.Gpio(7);
 button.dir(m.DIR_IN);
 var previousread;
 var ltime = moment();
-
+var diameter = 55; // centimeters
 setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
     var duration = ltime.subtract(moment());
-		io.emit('speed',{value:duration.millisecond()});
+    var milliduration = duration.millisecond();
+    var speed = (milliduration * 3600 * 10) /*convert to hours*/ / diameter; 
+      
+		io.emit('speed',{value:speed,duration:milliduration});
       
     console.log("Event speed emitted");
     ltime = moment();
