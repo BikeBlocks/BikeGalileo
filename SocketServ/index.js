@@ -11,10 +11,7 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
   console.log("connection");
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+  socket.emit('speed', { value: 00 });
 });
 
 
@@ -25,13 +22,15 @@ var button = new m.Gpio(7);
 button.dir(m.DIR_IN);
 var previousread;
 var ltime = moment();
+
 setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
     var duration = ltime.subtract(moment());
-		io.emit('buttonpress',{time:duration.millisecond(),speed:(3.1415*50*36)/duration.millisecond()});
-    console.log("btnemit");
+		io.emit('speed',{value:duration.millisecond()});
+      
+    console.log("Event speed emitted");
     ltime = moment();
 	}
     previousread = button.read();  
-}, 10);
+}, 1);
