@@ -28,7 +28,7 @@ setInterval(function() {
 	if(button.read() == 0 && previousread != 0) {
       
     var duration = process.hrtime() - ltime;
-      
+      console.log(seconds);
     var seconds = duration / 1000000;
 
     var speed = (3.14 * diameter) / (seconds / 360); /*convert to km/h */  
