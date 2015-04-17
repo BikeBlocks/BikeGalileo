@@ -27,8 +27,8 @@ setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
     var duration = ltime.subtract(moment());
-    var seconds = duration.seconds();
-    var milliduration = duration.millisecond();
+    var seconds = duration.asSeconds();
+    var milliduration = duration.asMillisecond();
     var speed = (3.14 * diameter) / (milliduration * 3600 * 100) /*convert to hours*/ ; 
       
 		io.emit('speed',{value:speed,duration:seconds});
