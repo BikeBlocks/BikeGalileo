@@ -31,7 +31,7 @@ setInterval(function() {
       
     var seconds = duration / 1000000;
 
-    var speed = ((3.14 * diameter) / (seconds / 360) /*convert to km/h*/ ; 
+    var speed = (3.14 * diameter) / (seconds / 360); /*convert to km/h */  
       
 		io.emit('speed',{value:speed,duration:seconds});
       
