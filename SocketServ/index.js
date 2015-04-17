@@ -34,7 +34,7 @@ setInterval(function() {
 		io.emit('speed',{value:speed,duration:seconds});
       
     console.log("Event speed emitted");
-    ltime = moment();
+    ltime = moment.duration(process.hrtime()/1000);
 	}
     previousread = button.read();  
 }, 1);
