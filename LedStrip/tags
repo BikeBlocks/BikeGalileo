@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARDMK_DIR	Makefile	/^ARDMK_DIR         = $(PROJECT_DIR)\/Arduino-Makefile$/;"	m
+ARDUINO_DIR	Makefile	/^ARDUINO_DIR       = \/usr\/share\/arduino$/;"	m
+AVRDDUDE	Makefile	/^AVRDDUDE          = \/usr\/bin\/avrdude$/;"	m
+AVR_GCC_VERSION	Makefile	/^AVR_GCC_VERSION  := $(shell expr `avr-gcc -dumpversion | cut -f1` \\>= 4.9)$/;"	m
+AVR_TOOLS_DIR	Makefile	/^AVR_TOOLS_DIR     = \/usr$/;"	m
+BOARD_TAG	Makefile	/^BOARD_TAG         = uno$/;"	m
+CFLAGS_STD	Makefile	/^CFLAGS_STD        = -std=gnu11$/;"	m
+CURRENT_DIR	Makefile	/^CURRENT_DIR       = $(shell basename $(CURDIR))$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS         = -pedantic -Wall -Wextra$/;"	m
+CXXFLAGS_STD	Makefile	/^CXXFLAGS_STD      = -std=gnu++11$/;"	m
+MONITOR_BAUDRATE	Makefile	/^MONITOR_BAUDRATE  = 115200$/;"	m
+MONITOR_PORT	Makefile	/^MONITOR_PORT      = \/dev\/ttyACM0$/;"	m
+OBJDIR	Makefile	/^OBJDIR            = $(PROJECT_DIR)\/bin\/$(BOARD_TAG)\/$(CURRENT_DIR)$/;"	m
+PROJECT_DIR	Makefile	/^PROJECT_DIR       = \/home\/minijackson\/Documents\/Development\/ArduinoJsonTest\/$/;"	m
+USER_LIB_PATH	Makefile	/^USER_LIB_PATH     :=  $(PROJECT_DIR)\/lib$/;"	m
+black	main.cpp	18;"	d	language:C++	file:
+counter	main.cpp	/^int counter = 0;$/;"	v	language:C++
+ledCount	main.cpp	/^int ledCount = 15;$/;"	v	language:C++
+lit	main.cpp	/^bool lit    = false;$/;"	v	language:C++
+loop	main.cpp	/^void loop(){$/;"	f	language:C++
+on	main.cpp	/^bool on     = false;$/;"	v	language:C++
+right	main.cpp	/^bool right  = false;$/;"	v	language:C++
+setLedsColor	main.cpp	/^void setLedsColor(uint8_t red, uint8_t green, uint8_t blue, bool right) {$/;"	f	language:C++
+setup	main.cpp	/^void setup() {$/;"	f	language:C++
+yellow	main.cpp	17;"	d	language:C++	file:
