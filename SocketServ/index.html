@@ -17,6 +17,9 @@
         my: 'data'
       });
     });
+    socket.on('buttonpress', function (data) {
+      alert("buttonpress, time" + data.time + " speed " + data.speed);
+    });    
   </script>
 </body>
 
