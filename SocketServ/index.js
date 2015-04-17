@@ -27,10 +27,11 @@ setInterval(function() {
   
 	if(button.read() == 0 && previousread != 0) {
     var duration = ltime.subtract(moment());
+    var seconds = duration.seconds();
     var milliduration = duration.millisecond();
     var speed = (3.14 * diameter) / (milliduration * 3600 * 100) /*convert to hours*/ ; 
       
-		io.emit('speed',{value:speed,duration:milliduration});
+		io.emit('speed',{value:speed,duration:seconds});
       
     console.log("Event speed emitted");
     ltime = moment();
