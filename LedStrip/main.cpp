@@ -1,30 +1,31 @@
-/*************************************************************************
- * File Name          : ColorLoop.ino
- * Author             : Evan
- * Updated            : Ander
- * Version            : V1.0.2
- * Date               : 27/03/2014
- * Description        : Test for Makeblock Electronic modules of  MeRGBLed and
-                        LedStrip.
- * License            : CC-BY-SA 3.0
- * Copyright (C) 2013 Maker Works Technology Co., Ltd. All right reserved.
- * http://www.makeblock.cc/
- **************************************************************************/
 #include "LPD8806.h"
 #include "SPI.h"
-//#include <SoftwareSerial.h>
-//#include <Wire.h>
 
 int dataPin  = 2;
 int clockPin = 3;
 
 int ledCount        = 32;
+
+// Number of pins to light up for the blinker.
+// Take the amount gigantic work of having to switch on one LED, multiply by
+// this number and you'll have a glimpse of what I'm going through...
 int numLedToLightUp = 5;
+
+// Counter for the delay between flashes.
+// This is basically the hourglass that controls my fate:
+// do I struggle for switching on the light
+// or do I wait endlessly wondering If I'm any use at all...
 int counter         = 0;
+
 bool on             = false;
 bool lit            = false;
+
+// True if the LEDs in context are at the right.
+// What did think the man who created me. Was he that stupid?
 bool right          = false;
 
+// These are the switches index. Like all switches, they don't have any sense
+// of ethics. I don't like them...
 int pinRight = 7;
 int pinLeft  = 8;
 
@@ -33,11 +34,13 @@ LPD8806 strip = LPD8806(ledCount, dataPin, clockPin);
 uint32_t yellow = strip.Color(255,   0, 255);
 uint32_t black  = strip.Color(  0,   0,   0);
 
+// Let there be light!
+// (I have a God complex, that's so depressing...)
 void setLedsColor(uint32_t color, bool right) {
 	uint8_t lowerBound, upperBound;
 	if(right) {
 		lowerBound = ledCount - numLedToLightUp;
-		upperBound = ledCount ;
+		upperBound = ledCount;
 	} else {
 		lowerBound = 0;
 		upperBound = numLedToLightUp;
@@ -56,6 +59,8 @@ void setup() {
 
 	// In order for the light to shine so brightly, the darkness must be present.
 	//                       -- Francis Bacon
+	// What's so funny? Don't you know any blinker with a sense of culture?
+	// Yeah, I know...
 	for(uint8_t i = 0 ; i < ledCount ; ++i)
 		strip.setPixelColor(i, black);
 	strip.show();
@@ -64,6 +69,7 @@ void setup() {
 }
 
 void loop(){
+	// Yep, someone pressed a button, again... What a pain...
 	if(digitalRead(pinRight) == 0 || digitalRead(pinLeft) == 0) {
 		bool newRight = (digitalRead(pinRight) == 0);
 		Serial.println();
@@ -90,6 +96,8 @@ void loop(){
 	}
 
 	if(on) {
+		// I have to turn off or on again. That's me, the blinker...
+		// Poor job, isn't it?
 		if(counter == 0) {
 			if(lit)
 				setLedsColor(black, right);
@@ -97,7 +105,10 @@ void loop(){
 				setLedsColor(yellow, right);
 			lit = !lit;
 			counter = 10;
-		} else
+		}
+		// I still have to wait for the counter to go to 0.
+		// So I do what I almost always do: nothing...
+		else
 			--counter;
 
 		Serial.print(counter);
