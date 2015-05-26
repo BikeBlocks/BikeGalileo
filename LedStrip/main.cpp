@@ -10,51 +10,67 @@
  * Copyright (C) 2013 Maker Works Technology Co., Ltd. All right reserved.
  * http://www.makeblock.cc/
  **************************************************************************/
-#include "Makeblock.h"
-#include <SoftwareSerial.h>
-#include <Wire.h>
+#include "LPD8806.h"
+#include "SPI.h"
+//#include <SoftwareSerial.h>
+//#include <Wire.h>
 
-#define yellow (uint8_t)255, (uint8_t)255, (uint8_t)0
-#define black  (uint8_t)0, (uint8_t)0, (uint8_t)0
+int dataPin  = 2;
+int clockPin = 3;
 
-MeRGBLed led(PORT_3);
-int ledCount = 15;
-bool on     = false;
-bool lit    = false;
-bool right  = false;
-int counter = 0;
+int ledCount        = 32;
+int numLedToLightUp = 5;
+int counter         = 0;
+bool on             = false;
+bool lit            = false;
+bool right          = false;
 
-void setLedsColor(uint8_t red, uint8_t green, uint8_t blue, bool right) {
-	uint8_t lowerBound = (right)? ledCount - 3 : 0;
-	uint8_t upperBound = (right)? ledCount     : 3;
+int pinRight = 7;
+int pinLeft  = 8;
+
+LPD8806 strip = LPD8806(ledCount, dataPin, clockPin);
+
+uint32_t yellow = strip.Color(255,   0, 255);
+uint32_t black  = strip.Color(  0,   0,   0);
+
+void setLedsColor(uint32_t color, bool right) {
+	uint8_t lowerBound, upperBound;
+	if(right) {
+		lowerBound = ledCount - numLedToLightUp;
+		upperBound = ledCount ;
+	} else {
+		lowerBound = 0;
+		upperBound = numLedToLightUp;
+	}
+
 	for(uint8_t i = lowerBound ; i < upperBound ; ++i)
-		led.setColorAt(i, red, green, blue);
-	led.show();
+		strip.setPixelColor(i, color);
+	strip.show();
 }
 
 void setup() {
-	pinMode(2, INPUT_PULLUP);
-	pinMode(4, INPUT_PULLUP);
+	pinMode(pinRight, INPUT_PULLUP);
+	pinMode(pinLeft, INPUT_PULLUP);
 
-	led.setNumber(ledCount);
+	strip.begin();
 
 	// In order for the light to shine so brightly, the darkness must be present.
 	//                       -- Francis Bacon
 	for(uint8_t i = 0 ; i < ledCount ; ++i)
-		led.setColorAt(i, 0, 0, 0);
-	led.show();
+		strip.setPixelColor(i, black);
+	strip.show();
 
 	Serial.begin(115200);
 }
 
 void loop(){
-	if(digitalRead(2) == 0 || digitalRead(4) == 0) {
-		bool newRight = (digitalRead(2) == 0);
+	if(digitalRead(pinRight) == 0 || digitalRead(pinLeft) == 0) {
+		bool newRight = (digitalRead(pinRight) == 0);
 		Serial.println();
 		Serial.print("On ");
 		Serial.println((newRight)? "right!" : "left!");
 
-		while(digitalRead(2) == 0 || digitalRead(4) == 0);
+		while(digitalRead(pinRight) == 0 || digitalRead(pinLeft) == 0);
 
 		bool different = (newRight != right);
 		right = newRight;
@@ -83,11 +99,11 @@ void loop(){
 			counter = 10;
 		} else
 			--counter;
+
 		Serial.print(counter);
 		Serial.print(" ");
 		if(counter == 0)
 			Serial.println();
-
 	}
 
 	delay(50);
