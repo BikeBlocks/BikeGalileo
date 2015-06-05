@@ -4,7 +4,7 @@
 int dataPin  = 2;
 int clockPin = 3;
 
-int ledCount        = 32;
+int ledCount = 32;
 
 // Number of pins to light up for the blinker.
 // Take the amount gigantic work of having to switch on one LED, multiply by
