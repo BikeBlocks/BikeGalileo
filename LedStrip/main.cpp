@@ -52,7 +52,7 @@ void setLedsColor(uint32_t color) {
 
 void setCenterLedsColor(uint32_t color) {
 	uint8_t upperBound = ledCount - numLedToLightUp;
-	for (uint8_t i = 0;i < upperBound; i++) {
+	for (uint8_t i = numLedToLightUp ; i < upperBound ; i++) {
 		strip.setPixelColor(i, color);
 	}
 	strip.show();
