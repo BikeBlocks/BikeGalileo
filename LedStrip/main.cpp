@@ -19,9 +19,10 @@ int counter         = 0;
 enum Mode {
 	NOTHING,
 	BLINK_LIT,
-	BLINK_EXTINCT,
-	STOP
+	BLINK_EXTINCT
 };
+
+bool stopActivated = false;
 
 enum Mode programMode = NOTHING;
 
@@ -44,6 +45,14 @@ uint32_t black  = strip.Color(  0,   0,   0);
 // (I have a God complex, that's so depressing...)
 void setLedsColor(uint32_t color) {
 	for(uint8_t i = 0 ; i < ledCount ; ++i) {
+		strip.setPixelColor(i, color);
+	}
+	strip.show();
+}
+
+void setCenterLedsColor(uint32_t color) {
+	uint8_t upperBound = ledCount - numLedToLightUp;
+	for (uint8_t i = 0;i < upperBound; i++) {
 		strip.setPixelColor(i, color);
 	}
 	strip.show();
@@ -104,21 +113,20 @@ void loop(){
 			setEndLedsColor(black, right);
 			programMode = NOTHING;
 		} else {
-			if(different || programMode == STOP)
-				setLedsColor(black);
+			if(different);
+				setEndLedsColor(black, !right);
 
 			setEndLedsColor(yellow, right);
 			counter = 10;
 			programMode = BLINK_LIT;
 		}
 	} else if(input == 's') {
-		if(programMode == STOP) {
+		if(stopActivated) {
 			setLedsColor(black);
-			programMode = NOTHING;
 		} else {
 			setLedsColor(red);
-			programMode = STOP;
 		}
+		stopActivated = !stopActivated;
 	}
 
 	if(isBlinking()) {
